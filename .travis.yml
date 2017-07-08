@@ -18,6 +18,3 @@ install:
 
 script:
   - tox
-
-after_success:
-  - codecov -e TOXENV,DJANGO

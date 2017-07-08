@@ -6,7 +6,7 @@ from typing import DefaultDict, Dict, List, Mapping, Tuple, Union
 
 import six
 
-from python_to_typescript.base import generate_interfaces
+from ..base import generate_interfaces
 
 LONG_TYPE = long if six.PY2 else int  # noqa
 
@@ -32,6 +32,7 @@ class BaseTypeConversionTestCase(unittest.TestCase):
                 'null_type': None,
                 'list_or_null': (None, list),
                 'list_or_null_or_null': (None, list, None),
+                'not_a_type': SomeOtherType(),
             }),
         ])
         expected = """\
@@ -46,6 +47,7 @@ class BaseTypeConversionTestCase(unittest.TestCase):
           list_type: any[]
           named_bytes_type: SomeOtherName
           named_type: SomeOtherName
+          not_a_type: any
           null_type: null
           object_type: object
           string_or_number: number | string

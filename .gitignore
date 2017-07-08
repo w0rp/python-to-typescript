@@ -1,4 +1,5 @@
 *.pyc
 .*
+/htmlcov
 /python_to_typescript.egg-info
 /ve
