@@ -8,7 +8,7 @@ import six
 NUMBER_TYPES = (int, float)
 
 if six.PY2:
-    NUMBER_TYPES += (long,)
+    NUMBER_TYPES += (long,)  # noqa
 
 
 def uniq(iterable, key=None):
