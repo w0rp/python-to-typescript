@@ -1,0 +1,22 @@
+[MESSAGES CONTROL]
+
+disable=
+    bad-continuation,
+    line-too-long,
+    missing-docstring,
+    no-self-use,
+    too-few-public-methods,
+    too-many-branches,
+    undefined-variable,
+
+[TYPECHECK]
+
+# Ignore Six for type checking.
+
+ignored-classes=
+    six,
+    six.moves,
+
+ignored-modules=
+    six,
+    six.moves,

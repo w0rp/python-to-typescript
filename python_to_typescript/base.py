@@ -1,3 +1,6 @@
+"""
+Basic functions for generating TypeScript interfaces from Python types.
+"""
 from __future__ import absolute_import, division, print_function, unicode_literals  # isort:skip # noqa
 
 import itertools
@@ -12,6 +15,9 @@ if six.PY2:
 
 
 def uniq(iterable, key=None):
+    """
+    Generate items where subsequent duplicates are eliminated.
+    """
     return (x[0] for x in itertools.groupby(iterable, key))
 
 
@@ -59,7 +65,7 @@ def _get_type_name_list(type_or_tuple):
         elif isinstance(some_type, six.text_type):
             name_list.append(some_type)
         # Check this first to avoid exceptions with issubclass
-        elif type(some_type) is not type:
+        elif not issubclass(type(some_type), type):
             name_list.append('any')
         elif issubclass(some_type, six.binary_type):
             name_list.append('string')
@@ -89,6 +95,19 @@ def type_name(type_or_tuple):
 
 
 def generate_interfaces(python_types, indentation=2, newline='\n'):
+    """
+    Generate TypeScript interfaces from python types. python_types must
+    be in the format [(interface_name, type_mapping), ...]
+
+    For example:
+    >>> print(generate_interfaces([('SomeInterface', {'b': str, 'a': int})]))
+    interface SomeInterface {
+      a: number
+      b: string
+    }
+
+    The members of the interface will be sorted by name.
+    """
     lines = []
 
     indentation_text = ' ' * indentation
