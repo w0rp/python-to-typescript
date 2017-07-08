@@ -10,7 +10,7 @@ import six
 
 NUMBER_TYPES = (int, float)
 
-if six.PY2:
+if six.PY2:  # pragma: no cover
     NUMBER_TYPES += (long,)  # noqa
 
 

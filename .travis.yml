@@ -12,19 +12,17 @@ sudo: false
 env:
   - TOXENV=django110
   - TOXENV=django111
-  - TOXENV=flake8
-  - TOXENV=pylint
 
 # Only run flake8 and pylint in the latest Python 3, and in Python 2.7
 matrix:
-  exclude:
-    - python: 3.4
+  include:
+    - python: "2.7"
       env: TOXENV=flake8
-    - python: 3.5
+    - python: "3.6"
       env: TOXENV=flake8
-    - python: 3.4
+    - python: "2.7"
       env: TOXENV=pylint
-    - python: 3.5
+    - python: "3.6"
       env: TOXENV=pylint
 
 install:
