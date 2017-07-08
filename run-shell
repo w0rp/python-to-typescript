@@ -1,0 +1,8 @@
+#!/bin/bash -eu
+
+# A script for starting up a Django shell easily.
+
+export DJANGO_SETTINGS_MODULE=settings
+export PYTHONSTARTUP=startup.py
+
+ve/bin/django-admin shell

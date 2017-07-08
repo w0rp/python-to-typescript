@@ -1,0 +1,2 @@
+-r test-requirements.txt
+Django==1.11.3
