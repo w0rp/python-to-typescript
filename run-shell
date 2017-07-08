@@ -5,4 +5,4 @@
 export DJANGO_SETTINGS_MODULE=settings
 export PYTHONSTARTUP=startup.py
 
-ve/bin/django-admin shell
+ve-py3/bin/django-admin shell

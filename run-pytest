@@ -3,3 +3,4 @@
 export DJANGO_SETTINGS_MODULE=settings
 
 ve/bin/pytest --cov python_to_typescript --cov-report html
+ve-py3/bin/pytest --cov python_to_typescript --cov-report html

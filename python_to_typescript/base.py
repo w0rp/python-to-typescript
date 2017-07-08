@@ -61,7 +61,9 @@ def _get_type_name_list(type_or_tuple):
         # Check this first to avoid exceptions with issubclass
         elif type(some_type) is not type:
             name_list.append('any')
-        elif issubclass(some_type, six.string_types):
+        elif issubclass(some_type, six.binary_type):
+            name_list.append('string')
+        elif issubclass(some_type, six.text_type):
             name_list.append('string')
         elif issubclass(some_type, NUMBER_TYPES):
             name_list.append('number')

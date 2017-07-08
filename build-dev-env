@@ -4,4 +4,10 @@ if ! [ -d ve ]; then
     virtualenv ve
 fi
 
+if ! [ -d ve-py3 ]; then
+    pyvenv ve-py3
+fi
+
 ve/bin/pip install -r dev-requirements.txt
+ve-py3/bin/pip install wheel
+ve-py3/bin/pip install -r dev-requirements.txt
