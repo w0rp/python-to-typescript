@@ -1,5 +1,6 @@
 djangorestframework==3.6.3
 flake8==3.3.0
+psycopg2==2.7.1
 pylint==1.7.2
 pytest-cov==2.5.1
 pytest-env==0.6.2

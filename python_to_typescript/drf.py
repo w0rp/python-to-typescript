@@ -30,6 +30,11 @@ def _serializer_name(serializer_class):
 
 
 def _python_type_for_field_without_null_check(field):
+    # A string comparison is used so we don't require psycopg for people who
+    # don't use Postgres.
+    if type(field).__name__ == 'CharMappingField':
+        return Dict[six.text_type, Optional[six.text_type]]
+
     if isinstance(field, (BooleanField, NullBooleanField)):
         return bool
 
