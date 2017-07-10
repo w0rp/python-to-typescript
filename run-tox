@@ -1,0 +1,6 @@
+#!/bin/bash -eu
+
+export DJANGO_SETTINGS_MODULE=settings
+
+ve/bin/tox
+ve-py3/bin/tox

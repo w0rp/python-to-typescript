@@ -2,7 +2,16 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import unittest
 from textwrap import dedent
-from typing import DefaultDict, Dict, List, Mapping, Tuple, Union
+from typing import (
+    DefaultDict,
+    Dict,
+    List,
+    Mapping,
+    Optional,
+    Set,
+    Tuple,
+    Union,
+)
 
 import six
 
@@ -21,6 +30,7 @@ class BaseTypeConversionTestCase(unittest.TestCase):
             ('SomeName', {
                 'foo': six.binary_type,
                 'bar': six.text_type,
+                'a_bool': bool,
                 'an_int': int,
                 'a_long': LONG_TYPE,
                 'anything_else': SomeOtherType,
@@ -33,10 +43,13 @@ class BaseTypeConversionTestCase(unittest.TestCase):
                 'list_or_null': (None, list),
                 'list_or_null_or_null': (None, list, None),
                 'not_a_type': SomeOtherType(),
+                'string_set': Set[six.text_type],
+                'optional_string': Optional[six.text_type],
             }),
         ])
         expected = """\
         interface SomeName {
+          a_bool: boolean
           a_long: number
           an_int: number
           anything_else: any
@@ -50,7 +63,9 @@ class BaseTypeConversionTestCase(unittest.TestCase):
           not_a_type: any
           null_type: null
           object_type: object
+          optional_string: string | null
           string_or_number: number | string
+          string_set: string[]
         }
         """
 

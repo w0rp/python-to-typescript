@@ -4,7 +4,7 @@ Basic functions for generating TypeScript interfaces from Python types.
 from __future__ import absolute_import, division, print_function, unicode_literals  # isort:skip # noqa
 
 import itertools
-from typing import Mapping, Sequence, Tuple, Union
+from typing import Mapping, Sequence, Set, Tuple, Union
 
 import six
 
@@ -12,6 +12,14 @@ NUMBER_TYPES = (int, float)
 
 if six.PY2:  # pragma: no cover
     NUMBER_TYPES += (long,)  # noqa
+
+
+class JSONTypeClass(object):
+    pass
+
+
+# A special type for denoting something is JSON.
+JSON_TYPE = JSONTypeClass()
 
 
 def uniq(iterable, key=None):
@@ -41,7 +49,7 @@ def _get_type_name_list(type_or_tuple):
     )
 
     for some_type in field_types:
-        if some_type is None:
+        if some_type is None or some_type is type(None): # noqa
             name_list.append('null')
         elif getattr(some_type, '__origin__', None) is Union:
             for union_type in some_type.__args__:
@@ -50,6 +58,10 @@ def _get_type_name_list(type_or_tuple):
             tuple_types = (type_name(x) for x in some_type.__args__)
             name_list.append('[{}]'.format(', '.join(tuple_types)))
         elif issubclass(getattr(some_type, '__origin__', type), Sequence):
+            name_list.append(
+                group_type(type_name(some_type.__args__[0])) + '[]'
+            )
+        elif issubclass(getattr(some_type, '__origin__', type), Set):
             name_list.append(
                 group_type(type_name(some_type.__args__[0])) + '[]'
             )
@@ -71,6 +83,8 @@ def _get_type_name_list(type_or_tuple):
             name_list.append('string')
         elif issubclass(some_type, six.text_type):
             name_list.append('string')
+        elif issubclass(some_type, bool):
+            name_list.append('boolean')
         elif issubclass(some_type, NUMBER_TYPES):
             name_list.append('number')
         elif issubclass(some_type, list):

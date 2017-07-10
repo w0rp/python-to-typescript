@@ -2,12 +2,16 @@
 
 disable=
     bad-continuation,
+    duplicate-code,
+    invalid-name,
     line-too-long,
     missing-docstring,
     no-self-use,
     too-few-public-methods,
     too-many-branches,
+    too-many-return-statements,
     undefined-variable,
+    unused-import,
 
 [TYPECHECK]
 
